@@ -1,10 +1,3 @@
-/**
- * REFERENCES
- *
- * Array Iteration Methods: https://www.w3schools.com/JS/js_array_iteration.asp
- * String Methods: https://www.w3schools.com/Jsref/jsref_includes.asp
- */
-
 const channels = [
   {
     name: "PowerfulJRE",
@@ -41,6 +34,7 @@ const channels = [
         title: "The Universal S",
         duration: 19,
       },
+
       {
         title: "Cicada 3301: An Internet Mystery",
         duration: 18,
@@ -63,6 +57,7 @@ const channels = [
         title: "The Trouble With Tumbleweed",
         duration: 7,
       },
+
       {
         title: "Lockdown Productivity: Spaceship You",
         duration: 11,
@@ -88,12 +83,13 @@ const channels = [
   {
     name: "Alternate History Hub",
     description:
-      "An entire channel dedicated to the 'What If?'. Using knowledge of geography, population and other historical facts I predict what could have happened had things gone differently in history.",
+      "An entire channel dedicated to the 'What If?'.  Using knowledge of geography, population and other historical facts I predict what could have happened had things gone differently in history.",
     videos: [
       {
         title: "What if Rome Never Existed? Part III",
         duration: 19,
       },
+
       {
         title: "What if Trump Was Never Elected President?",
         duration: 4,
@@ -128,27 +124,24 @@ const channels = [
   },
 ];
 
-function getChannelName(channel) {
-  return channel.name;
+function totalVideosDuration(channel) {
+  return channel.videos.reduce((total, video) => total + video.duration, 0);
 }
 
-console.log(getChannelName(channels[0]));
-
-function numberOfVideos(channel) {
-  return channel.videos.length;
+function channelWithMostContent(channels) {
+  return channels.sort(
+    (a, b) => totalVideosDuration(b) - totalVideosDuration(a)
+  )[0];
 }
 
-console.log(numberOfVideos(channels[0]));
-
-function channelHasVideo(videoTitle, channel) {
-  return channel.videos.some((video) => video.title === videoTitle);
+function longestChannelName(channels) {
+  return channels.sort((a, b) => b.name.length - a.name.length)[0];
 }
 
-console.log(channelHasVideo("The Universal S", channels[0])); // false
-console.log(channelHasVideo("The Universal S", channels[1])); // true
+// Check your answers by running this file and comparing what it logs
 
-function getChannelByName(channelName, channels) {
-  return channels.find((channel) => channel.name === channelName);
-}
+console.log(totalVideosDuration(channels[0]));
 
-console.log(getChannelByName("PowerfulJRE", channels));
+console.log(channelWithMostContent(channels));
+
+console.log(longestChannelName(channels));
